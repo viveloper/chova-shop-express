@@ -1,0 +1,14 @@
+{
+  "env": {
+    "browser": false,
+    "commonjs": true,
+    "es2020": true,
+    "node": true
+  },
+  "extends": ["eslint:recommended", "prettier"],
+  "parserOptions": {
+    // "sourceType": "module",
+    "ecmaVersion": 2020
+  },
+  "rules": {}
+}

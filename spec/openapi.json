@@ -1,0 +1,729 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Chova Shop",
+    "description": "Chova Shop API. 스웨거 기반으로 만들어졌고 자세한 내용은 다음 링크에서 확인이 가능합니다. [http://swagger.io](http://swagger.io).\n",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "chova-shop@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:4010",
+      "description": "Prism Mock API"
+    }
+  ],
+  "tags": [
+    {
+      "name": "product",
+      "description": "상품"
+    },
+    {
+      "name": "category",
+      "description": "상품 카테고리"
+    }
+  ],
+  "paths": {
+    "/product": {
+      "get": {
+        "tags": ["product"],
+        "summary": "전체 상품을 조회합니다.",
+        "operationId": "getProudcts",
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "query",
+            "description": "카테고리아이디",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "ObjectId"
+            },
+            "examples": {
+              "Shirt 예제 아이디": {
+                "value": "5f3e95643c984d3ddcb527cb"
+              }
+            }
+          },
+          {
+            "name": "isNewArrival",
+            "in": "query",
+            "description": "신상여부",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "format": "ObjectId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                },
+                "examples": {
+                  "products": {
+                    "$ref": "#/components/examples/products"
+                  },
+                  "5f3e95643c984d3ddcb527cb": {
+                    "$ref": "#/components/examples/products-5f3e95643c984d3ddcb527cb"
+                  },
+                  "5f3e956ad5fe5640e22657ce2": {
+                    "$ref": "#/components/examples/products-5f3e956ad5fe5640e22657ce2"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["product"],
+        "summary": "상품정보를 업데이트합니다.",
+        "operationId": "updateProduct",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Product"
+        },
+        "responses": {
+          "400": {
+            "description": "잘못된 ID"
+          },
+          "404": {
+            "description": "해당 상품이 없습니다."
+          },
+          "405": {
+            "description": "잘못된 입력입니다."
+          }
+        }
+      },
+      "post": {
+        "tags": ["product"],
+        "summary": "새로운 상품을 추가합니다.",
+        "operationId": "addProduct",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Product"
+        },
+        "responses": {
+          "405": {
+            "description": "잘못된 입력"
+          }
+        }
+      }
+    },
+    "/product/{productId}": {
+      "get": {
+        "tags": ["product"],
+        "summary": "아이디로 상품을 가져옵니다.",
+        "description": "상품 단건을 조회합니다.",
+        "operationId": "getProductById",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "상품아이디",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "ObjectId"
+            },
+            "examples": {
+              "기본예제": {
+                "value": "1"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                },
+                "examples": {
+                  "1번상품": {
+                    "$ref": "#/components/examples/product"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "잘못된 ID"
+          },
+          "404": {
+            "description": "상품을 찾을수 없습니다."
+          }
+        }
+      },
+      "post": {
+        "tags": ["product"],
+        "summary": "아이디에 해당하는 상품을 수정합니다.",
+        "operationId": "updatePetWithForm",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "ID of pet that needs to be updated",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "405": {
+            "description": "잘못된 입력"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["product"],
+        "summary": "아이디에 해당하는 상품을 삭제합니다.",
+        "operationId": "deletePet",
+        "parameters": [
+          {
+            "name": "api_key",
+            "in": "header",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "Pet id to delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "잘못된 ID"
+          },
+          "404": {
+            "description": "상품을 찾을수 없습니다."
+          }
+        }
+      }
+    },
+    "/product/{productId}/related": {
+      "get": {
+        "tags": ["product"],
+        "summary": "아이디로 상품을 가져옵니다.",
+        "description": "상품 단건을 조회합니다.",
+        "operationId": "getProductById",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "상품아이디",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "ObjectId"
+            },
+            "examples": {
+              "기본예제": {
+                "value": "1"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                },
+                "examples": {
+                  "추천상품목록예제": {
+                    "$ref": "#/components/examples/products"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "잘못된 ID"
+          },
+          "404": {
+            "description": "상품을 찾을수 없습니다."
+          }
+        }
+      },
+      "post": {
+        "tags": ["product"],
+        "summary": "아이디에 해당하는 상품을 수정합니다.",
+        "operationId": "updatePetWithForm",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "ID of pet that needs to be updated",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "405": {
+            "description": "잘못된 입력"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["product"],
+        "summary": "아이디에 해당하는 상품을 삭제합니다.",
+        "operationId": "deletePet",
+        "parameters": [
+          {
+            "name": "api_key",
+            "in": "header",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "Pet id to delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "잘못된 ID"
+          },
+          "404": {
+            "description": "상품을 찾을수 없습니다."
+          }
+        }
+      }
+    },
+    "/product/{productId}/uploadImage": {
+      "post": {
+        "tags": ["product"],
+        "summary": "아이디에 해당하는 이미지를 추가합니다.",
+        "operationId": "uploadFile",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "상품 ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/octet-stream": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "성공",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/category": {
+      "get": {
+        "tags": ["category"],
+        "summary": "전체 카테고리 목록을 가져온다.",
+        "operationId": "getCategories",
+        "responses": {
+          "200": {
+            "description": "성공",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Category"
+                  }
+                },
+                "examples": {
+                  "기본 카테고리 예제": {
+                    "$ref": "#/components/examples/categories"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Category": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "ObjectId"
+          },
+          "name": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "ISODateTime"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "ISODateTimeFormat"
+          }
+        }
+      },
+      "ApiResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "Product": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "ObjectId"
+          },
+          "info": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "avg_stars": {
+            "maximum": 5,
+            "minimum": 0,
+            "type": "number"
+          },
+          "total_reviews": {
+            "type": "number"
+          },
+          "img_url": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string",
+            "format": "ObjectId"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "ISODateTime"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "ISODateTimeFormat"
+          }
+        },
+        "description": "상품"
+      },
+      "body": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Updated name of the pet"
+          },
+          "status": {
+            "type": "string",
+            "description": "Updated status of the pet"
+          }
+        }
+      }
+    },
+    "examples": {
+      "products": {
+        "summary": "전체 목록 셈플",
+        "value": [
+          {
+            "id": "1",
+            "name": "React Note",
+            "price": 2000,
+            "info": "Lorem ipsum dolor sit amet",
+            "avg_stars": 4,
+            "total_reviews": 200,
+            "category": 1
+          },
+          {
+            "id": "2",
+            "name": "React Product 2",
+            "price": 13000,
+            "info": "Lorem ipsum dolor sit amet",
+            "avg_stars": 3,
+            "total_reviews": 200,
+            "category": 3
+          },
+          {
+            "id": "3",
+            "name": "React Doll 1",
+            "price": 2000,
+            "info": "Lorem ipsum dolor sit amet",
+            "avg_stars": 4,
+            "total_reviews": 200,
+            "category": 1
+          },
+          {
+            "id": "4",
+            "name": "React Doll 2",
+            "price": 13000,
+            "info": "Lorem ipsum dolor sit amet",
+            "avg_stars": 3,
+            "total_reviews": 200,
+            "category": 3
+          }
+        ]
+      },
+      "products-5f3e95643c984d3ddcb527cb": {
+        "summary": "Shirts 프로덕트 목록 셈플",
+        "value": [
+          {
+            "id": "1",
+            "name": "React Note",
+            "price": 2000,
+            "info": "Lorem ipsum dolor sit amet",
+            "avg_stars": 4,
+            "total_reviews": 200,
+            "category": 1
+          },
+          {
+            "id": "2",
+            "name": "React Product 2",
+            "price": 13000,
+            "info": "Lorem ipsum dolor sit amet",
+            "avg_stars": 3,
+            "total_reviews": 200,
+            "category": 3
+          }
+        ]
+      },
+      "products-5f3e956ad5fe5640e22657ce2": {
+        "summary": "Dolls 프로덕트 목록 셈플",
+        "value": [
+          {
+            "id": "5",
+            "name": "React Doll 1",
+            "price": 2000,
+            "info": "Lorem ipsum dolor sit amet",
+            "avg_stars": 4,
+            "total_reviews": 200,
+            "category": 1
+          },
+          {
+            "id": "4",
+            "name": "React Doll 2",
+            "price": 13000,
+            "info": "Lorem ipsum dolor sit amet",
+            "avg_stars": 3,
+            "total_reviews": 200,
+            "category": 3
+          }
+        ]
+      },
+      "product": {
+        "summary": "프로덕트 셈플",
+        "value": {
+          "id": "1",
+          "name": "React Note",
+          "price": 2000,
+          "info": "Lorem ipsum dolor sit amet",
+          "avg_stars": 4,
+          "total_reviews": 200,
+          "category": 1
+        }
+      },
+      "categories": {
+        "summary": "카테고리 예제",
+        "value": [
+          {
+            "id": "5f3e95643c984d3ddcb527cb",
+            "name": "Shirts",
+            "counts": 3
+          },
+          {
+            "id": "5f3e956ad5fe5640e22657ce2",
+            "name": "Dolls",
+            "counts": 2
+          },
+          {
+            "id": "5f3e9570748c5c9d75a8b3c3",
+            "name": "Notes",
+            "counts": 5
+          },
+          {
+            "id": "5f3e95753da7e1aa3a2c8ada",
+            "name": "Watches",
+            "counts": 1
+          },
+          {
+            "id": "5f3e95791edac0e02a9c6df4",
+            "name": "Clothes",
+            "counts": 10
+          },
+          {
+            "id": "5f3e9582cc396a9d8bc2914c",
+            "name": "Shoes",
+            "counts": 4
+          },
+          {
+            "id": "5f3e9589ce37175a09d9b8f6",
+            "name": "Gloves",
+            "counts": 10
+          }
+        ]
+      }
+    },
+    "requestBodies": {
+      "JoinRequest": {
+        "description": "회원가입요청",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "format": "ObjectId"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Product": {
+        "description": "상품정보",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Product"
+            }
+          }
+        },
+        "required": true
+      }
+    },
+    "securitySchemes": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "api_key",
+        "in": "header"
+      }
+    }
+  }
+}

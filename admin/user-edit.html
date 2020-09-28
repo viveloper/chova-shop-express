@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="admin-style.css" />
+    <title>PRGMS ADMIN</title>
+  </head>
+
+  <body class="bg-light">
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+      <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="/admin">프로그래머스 어드민</a>
+      <button
+        class="navbar-toggler position-absolute d-md-none collapsed"
+        type="button"
+        data-toggle="collapse"
+        data-target="#sidebarMenu"
+        aria-controls="sidebarMenu"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href="#">Sign out</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="container-fluid">
+      <div class="row">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+          <div class="sidebar-sticky pt-3">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" href="./user-list.html"> <span data-feather="users"></span> 사용자 관리 </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+          <div
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+          >
+            <h1 class="h2">사용자 수정</h1>
+          </div>
+
+          <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="user-name">사용자 아이디</label>
+              <input
+                type="text"
+                readonly=""
+                class="form-control"
+                id="user-id"
+                placeholder="사용자 이름"
+                value="5f4b3594e4ec9764e80ea8c7"
+                name="id"
+              />
+            </div>
+            <div class="form-group">
+              <label for="user-name">사용자 이름</label>
+              <input
+                type="text"
+                class="form-control"
+                id="user-name"
+                placeholder="사용자 이름"
+                value="harry"
+                name="name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="user-email">사용자 이메일</label>
+              <input type="email" class="form-control" id="user-email" value="harry@gmail.com" name="email" />
+            </div>
+            <div class="form-group">
+              <label for="user-profil-image">프로필 이미지</label>
+              <div>
+                <img
+                  style="width: 350px; height: 350px"
+                  class="rounded img-fluid img-thumbnail"
+                  src="./uploads/harry.png"
+                />
+              </div>
+              <input type="file" class="form-control" id="user-profil-image" name="image" />
+            </div>
+            <div class="form-group">
+              <label for="user-loginCount">사용자 로그인 횟수</label>
+              <input disabled="" type="number" class="form-control" id="user-loginCount" value="3" name="loginCount" />
+            </div>
+
+            <div class="form-group">
+              <label for="user-lastLoginAt">마지막 로그인 일시</label>
+              <input
+                disabled=""
+                type="text"
+                class="form-control"
+                id="user-lastLoginAt"
+                value="2020-08-30T12:56:16.782Z"
+                name="lastLoginAt"
+              />
+            </div>
+            <div class="form-group">
+              <label for="user-createdAt">생성 일시</label>
+              <input
+                readonly=""
+                type="text"
+                class="form-control"
+                id="user-createdAt"
+                value="2020-08-30T12:56:16.782Z"
+                name="createdAt"
+              />
+            </div>
+            <div class="form-group">
+              <label for="user-updatedAt">수정 일시</label>
+              <input
+                readonly=""
+                type="text"
+                class="form-control"
+                id="user-updatedAt"
+                value="2020-08-30T12:56:16.782Z"
+                name="updatedAt"
+              />
+            </div>
+            <div class="float-right">
+              <ul class="list-inline">
+                <li class="list-inline-item">
+                  <button type="submit" id="edit-btn" class="btn btn-primary">Submit</button>
+                </li>
+                <li class="list-inline-item">
+                  <button
+                    type="submit"
+                    class="btn btn-danger"
+                    id="delete-btn"
+                    formaction="?_method=DELETE"
+                    formmethod="POST"
+                    value=""
+                  >
+                    Delete
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </form>
+        </main>
+      </div>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+    <script>
+      feather.replace();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+<%- include('../../partials/header') -%>
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">카테고리 추가</h1>
+</div>
+
+<form method="post" action="/admin/category">
+  <div class="form-group">
+    <label for="category-name">카테고리 이름</label>
+    <input type="text" class="form-control" id="category-name" placeholder="사용자 이름" name="name" />
+  </div>
+
+  <div class="float-right">
+    <ul class="list-inline">
+      <li class="list-inline-item">
+        <button type="submit" id="edit-btn" class="btn btn-primary">추가</button>
+      </li>
+    </ul>
+  </div>
+</form>
+<%- include('../../partials/footer') -%>

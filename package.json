@@ -1,0 +1,40 @@
+{
+  "name": "chova-shop-express",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "format": "prettier --write \"./**/*.{js,html,css}\"",
+    "local": "nodemon src/index.js | pino-pretty --translateTime"
+  },
+  "devDependencies": {
+    "eslint": "^7.7.0",
+    "eslint-config-prettier": "^6.11.0",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.1.0"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "compression": "^1.7.4",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-pino-logger": "^5.0.0",
+    "express-session": "^1.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.20",
+    "method-override": "^3.0.0",
+    "mongodb": "^3.6.1",
+    "mongoose": "^5.10.2",
+    "multer": "^1.4.2",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "pino": "^6.5.1",
+    "pino-pretty": "^4.1.0",
+    "swagger-ui-express": "^4.1.4"
+  }
+}

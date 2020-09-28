@@ -1,0 +1,36 @@
+<%- include('../../partials/header') -%>
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">사용자 목록</h1>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <a href="/admin/user/new" type="button" class="btn btn-sm btn-dark mr-2">Create User</a>
+    <a href="/admin/user/export-csv" type="button" class="btn btn-sm btn-dark mr-2">Export CSV</a>
+  </div>
+</div>
+
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>이름</th>
+      <th>email</th>
+      <th>로그인 횟수</th>
+      <th>최종 로그인 일시</th>
+      <th>생성일시</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% users.forEach(user => { %>
+    <tr onclick="location.href = '/admin/user/<%= user.id%>'">
+      <td><%= user.id %></td>
+      <td><%= user.name %></td>
+      <td><%= user.email %></td>
+      <td><%= user.loginCount %></td>
+      <td><%= user.lastLoginAt %></td>
+      <td><%= user.createdAt %></td>
+    </tr>
+    <% }); %>
+  </tbody>
+</table>
+
+<%- include('../../partials/footer') -%>

@@ -1,0 +1,31 @@
+<%- include('../../partials/header') -%>
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">카테고리 목록</h1>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <a href="/admin/category/new" type="button" class="btn btn-sm btn-dark mr-2">Create Category</a>
+  </div>
+</div>
+
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>이름</th>
+      <th>생성일자</th>
+      <th>수정일자</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% categories.forEach(category => { %>
+    <tr onclick="location.href = '/admin/category/<%= category.id%>'">
+      <td><%= category.id %></td>
+      <td><%= category.name %></td>
+      <td><%= category.createdAt.toLocaleString() %></td>
+      <td><%= category.updatedAt.toLocaleString() %></td>
+    </tr>
+    <% }); %>
+  </tbody>
+</table>
+
+<%- include('../../partials/footer') -%>

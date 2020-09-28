@@ -1,0 +1,23 @@
+<%- include('../partials/header') -%>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1>Chova Shop Admin</h1>
+</div>
+<div class="signup-form">
+  <form method="POST" action="/admin/login">
+    <label for="email">이메일</label>
+    <div class="form-group">
+      <input id="email" type="email" name="email" class="form-control" />
+    </div>
+    <label for="password">비밀번호</label>
+    <div class="form-group">
+      <input id="password" type="password" name="password" class="form-control" />
+    </div>
+    <% if (errorMessage.length > 0) {%>
+    <div class="alert alert-danger" role="alert"><%= errorMessage %></div>
+    <%}%>
+    <div class="form-group">
+      <button class="btn btn-success btn-lg btn-block" type="submit">로그인</button>
+    </div>
+  </form>
+</div>
+<%- include('../partials/footer') -%>

@@ -1,0 +1,35 @@
+<%- include('../../partials/header') -%>
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">상품 목록</h1>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <a href="/admin/product/new" type="button" class="btn btn-sm btn-dark mr-2">Create Product</a>
+  </div>
+</div>
+
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>이름</th>
+      <th>가격</th>
+      <th>카테고리</th>
+      <th>평균 평점</th>
+      <th>전체 리뷰수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% products.forEach(product => { %>
+    <tr onclick="location.href = '/admin/product/<%= product.id%>'">
+      <td><%= product.id %></td>
+      <td><%= product.name %></td>
+      <td><%= product.price %></td>
+      <td><%= product.category %></td>
+      <td><%= product.avg_stars %></td>
+      <td><%= product.total_reviews %></td>
+    </tr>
+    <% }); %>
+  </tbody>
+</table>
+
+<%- include('../../partials/footer') -%>
