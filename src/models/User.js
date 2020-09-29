@@ -33,7 +33,7 @@ const User = new Schema(
 User.pre('save', function (next) {
   if (!this.isModified('password')) return next();
 
-  bcrypt.genSalt(PASSWORD_SALT_HASH, function (err, salt) {
+  bcrypt.genSalt(PASSWORD_SALT_HASH, (err, salt) => {
     if (err) return next(err);
 
     bcrypt.hash(this.password, salt, (err, hash) => {

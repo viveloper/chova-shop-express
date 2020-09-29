@@ -4,6 +4,7 @@ const Product = require('../models/Product');
 const Category = require('../models/Category');
 const _ = require('lodash');
 const { IMG_URL_ROOT } = require('../common/config');
+const { json } = require('express');
 
 const getProductList = (req, res, next) => {
   const categoryId = req.query.categoryId;
@@ -25,7 +26,14 @@ const getProductList = (req, res, next) => {
       ...(sortBy ? { [sortBy]: -1 } : { updatedAt: 1 }),
     })
     .exec((err, products) => {
-      res.render('pages/product/list', { products });
+      res.format({
+        async html() {
+          res.render('pages/product/list', { products });
+        },
+        async json() {
+          res.send(products);
+        },
+      });
     });
 };
 

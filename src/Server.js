@@ -31,7 +31,7 @@ module.exports = class Server {
 
     app.use(cookieParser());
     app.use(
-      session({ secret: SESSION_COOKIE_SECRET, cookie: { maxAge: 60000 }, resave: false, saveUninitialized: true }),
+      session({ secret: SESSION_COOKIE_SECRET, cookie: { maxAge: 3600000 }, resave: false, saveUninitialized: true }),
     );
     app.use(passport.initialize());
     app.use(passport.session());
